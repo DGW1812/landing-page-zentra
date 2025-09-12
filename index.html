@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zentra – Find your flow in the chaos</title>
+  <meta name="description" content="Zentra ist die ruhige Kalender-Schicht, die Reibung reduziert, Fokus schützt und dich sanft in deinen Rhythmus nudgt." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Zentra – Struktur für deine Zeit" />
+  <meta property="og:description" content="Die Landingpage für Early Access. Join the waitlist." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og.jpg" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <a class="logo" href="/">Zentra</a>
+      <a class="ghost" href="#waitlist">Early Access</a>
+    </nav>
+    <section class="hero">
+      <h1>Der Kalender, der deinen Fokus schützt.</h1>
+      <p class="sub">Zentra reduziert kognitive Reibung, schützt Fokuszeiten und nudgt dich sanft in deinen Rhythmus.</p>
+      <form id="waitlist" action="https://formspree.io/f/YOUR_ID" method="POST" class="form">
+        <input aria-label="E-Mail" type="email" name="email" placeholder="E-Mail für Early Access" required />
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <small class="trust">Kein Spam. Abmeldung jederzeit.</small>
+    </section>
+  </header>
+
+  <main class="container features">
+    <article>
+      <h3>🧘 Focus Modes</h3>
+      <p>Automatisch Fokus schützen – mit ruhiger UI statt Alarmen.</p>
+    </article>
+    <article>
+      <h3>🌀 Flow Nudges</h3>
+      <p>„5 Calls hintereinander – 15 Min Reset?“ Sanfte, kontextsensitive Hinweise.</p>
+    </article>
+    <article>
+      <h3>🗓️ Energy View</h3>
+      <p>Plane nach Energie, nicht nach Slots. Klarheit statt Kalenderstress.</p>
+    </article>
+  </main>
+
+  <section class="container quote">
+    <blockquote>„Mein Kalender ist voll – aber ich schaffe nichts.“</blockquote>
+    <p class="caption">– Lena, Consultant (Persona)</p>
+  </section>
+
+  <section class="container cta">
+    <h2>Build with us.</h2>
+    <p>Werde Early User: exklusiver Zugang, Feedback-Loop, Priorität im Beta-Rollout.</p>
+    <a class="button" href="#waitlist">Jetzt eintragen</a>
+  </section>
+
+  <footer class="container footer">
+    <p>© <span id="year"></span> Zentra</p>
+    <a href="/privacy.html">Datenschutz</a>
+    <a href="/imprint.html">Impressum</a>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Optional: Handle Formspree success message inline
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const r = await fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' }});
+      if (r.ok) form.innerHTML = '<p class="success">Danke! Du bist auf der Waitlist ✅</p>';
+      else form.innerHTML = '<p class="error">Ups – versuch es später nochmal.</p>';
+    });
+  </script>
+</body>
+</html>
