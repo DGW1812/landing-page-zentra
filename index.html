@@ -1,79 +1,309 @@
-<!doctype html>
-<html lang="de">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Zentra – Find your flow in the chaos</title>
-  <meta name="description" content="Zentra ist die ruhige Kalender-Schicht, die Reibung reduziert, Fokus schützt und dich sanft in deinen Rhythmus nudgt." />
-  <!-- Open Graph -->
-  <meta property="og:title" content="Zentra – Struktur für deine Zeit" />
-  <meta property="og:description" content="Die Landingpage für Early Access. Join the waitlist." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og.jpg" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentra</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --bg-primary: #ffffff;
+            --border-light: #e8e8e8;
+            --accent-blue: #2563eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            font-weight: 400;
+            font-size: 18px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            max-width: 700px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Main Content */
+        main {
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+        
+        /* Title */
+        .title {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .title h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .title .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        /* Essay Content */
+        .essay {
+            margin-bottom: 4rem;
+        }
+        
+        .essay p {
+            font-size: 18px;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+        }
+        
+        .essay p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .essay strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* CTA Section - moved up */
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--text-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-button:hover {
+            background: var(--accent-blue);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+        
+        .cta-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+        
+        /* Links */
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .header-content {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            
+            main {
+                padding-top: 5rem;
+            }
+            
+            .title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .title .subtitle {
+                font-size: 1.15rem;
+            }
+            
+            .essay p {
+                font-size: 16px;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Selection styling */
+        ::selection {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--text-primary);
+        }
+    </style>
 </head>
 <body>
-  <header class="container">
-    <nav class="nav">
-      <a class="logo" href="/">Zentra</a>
-      <a class="ghost" href="#waitlist">Early Access</a>
-    </nav>
-    <section class="hero">
-      <h1>Der Kalender, der deinen Fokus schützt.</h1>
-      <p class="sub">Zentra reduziert kognitive Reibung, schützt Fokuszeiten und nudgt dich sanft in deinen Rhythmus.</p>
-      <form id="waitlist" action="https://formspree.io/f/YOUR_ID" method="POST" class="form">
-        <input aria-label="E-Mail" type="email" name="email" placeholder="E-Mail für Early Access" required />
-        <button type="submit">Join the waitlist</button>
-      </form>
-      <small class="trust">Kein Spam. Abmeldung jederzeit.</small>
-    </section>
-  </header>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">Zentra</a>
+            <a href="#join" class="nav-link">Join Us</a>
+        </div>
+    </header>
 
-  <main class="container features">
-    <article>
-      <h3>🧘 Focus Modes</h3>
-      <p>Automatisch Fokus schützen – mit ruhiger UI statt Alarmen.</p>
-    </article>
-    <article>
-      <h3>🌀 Flow Nudges</h3>
-      <p>„5 Calls hintereinander – 15 Min Reset?“ Sanfte, kontextsensitive Hinweise.</p>
-    </article>
-    <article>
-      <h3>🗓️ Energy View</h3>
-      <p>Plane nach Energie, nicht nach Slots. Klarheit statt Kalenderstress.</p>
-    </article>
-  </main>
+    <main>
+        <div class="container">
+            <!-- Title -->
+            <section class="title">
+                <h1>Zentra</h1>
+                <p class="subtitle">Rethinking time. Beyond the calendar.</p>
+            </section>
 
-  <section class="container quote">
-    <blockquote>„Mein Kalender ist voll – aber ich schaffe nichts.“</blockquote>
-    <p class="caption">– Lena, Consultant (Persona)</p>
-  </section>
+            <!-- Essay -->
+            <article class="essay">
+                <p>
+                    We don't need another app that manages meetings. We need an assistant that understands rhythm, energy, and priorities. Zentra makes calendars disappear – so you can focus on flow.
+                </p>
 
-  <section class="container cta">
-    <h2>Build with us.</h2>
-    <p>Werde Early User: exklusiver Zugang, Feedback-Loop, Priorität im Beta-Rollout.</p>
-    <a class="button" href="#waitlist">Jetzt eintragen</a>
-  </section>
+                <p>
+                    Calendars were built for meetings. Not for focus. Not for multi-project professionals. The result: fragmented schedules, constant context switching, and a week that feels owned by others. We've accepted this broken system for too long.
+                </p>
 
-  <footer class="container footer">
-    <p>© <span id="year"></span> Zentra</p>
-    <a href="/privacy.html">Datenschutz</a>
-    <a href="/imprint.html">Impressum</a>
-  </footer>
+                <p>
+                    Zentra represents a fundamental shift in how we think about time management. It's not a calendar – it's a <strong>personal scheduling assistant</strong> that lives above your calendars, orchestrates them seamlessly, and speaks your language. Think of it as one command center for all your time.
+                </p>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    // Optional: Handle Formspree success message inline
-    const form = document.querySelector('form');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const r = await fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' }});
-      if (r.ok) form.innerHTML = '<p class="success">Danke! Du bist auf der Waitlist ✅</p>';
-      else form.innerHTML = '<p class="error">Ups – versuch es später nochmal.</p>';
-    });
-  </script>
+                <p>
+                    The system works through invisible integration. Google, Outlook, client tools – all synced and managed in the background. You interact with Zentra through a natural MCP interface, controlling your time like talking to an assistant rather than clicking through apps. No more context switching between platforms.
+                </p>
+
+                <p>
+                    But Zentra goes beyond simple scheduling. It provides <strong>flow protection</strong> – actively blocking distractions, securing deep work periods, and gently nudging you back into rhythm when you drift. It understands that not all hours are equal, implementing energy-first planning that schedules around your natural patterns rather than arbitrary time blocks.
+                </p>
+            </article>
+
+            <!-- Early CTA -->
+            <section class="cta-section" id="join">
+                <a href="#" class="cta-button">Join the waitlist</a>
+                <p class="cta-subtitle">Be among the first to experience a new way of managing time.</p>
+            </section>
+
+            <!-- Continuation of Essay -->
+            <article class="essay">
+                <p>
+                    The experience is designed to feel minimal, calm, and fundamentally human. Zentra feels less like software, more like a <strong>partner in your week</strong>. It doesn't tell you what to do – it helps you feel in control again. The interface fades into the background, leaving you with clarity and focus.
+                </p>
+
+                <p>
+                    This timing matters. Work has become increasingly fragmented. Attention is scarce. Traditional productivity tools have reached their limits, creating more complexity rather than simplicity. AI can finally make time management <strong>human again</strong> – understanding context, learning preferences, and adapting to the unique rhythm of how you actually work.
+                </p>
+
+                <p>
+                    Zentra is where calendars end and flow begins. It's not about optimizing every minute, but about creating space for the work that matters most. In a world of endless notifications and fragmented attention, we're building something different: a calm center that helps you reclaim your time and, ultimately, your focus.
+                </p>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple header scroll effect
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                header.style.transform = currentScrollY > lastScrollY ? 'translateY(-100%)' : 'translateY(0)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+    </script>
 </body>
 </html>
