@@ -293,5 +293,87 @@
             lastScrollY = currentScrollY;
         });
     </script>
+<form id="waitlist-form" style="display:flex; gap:8px; align-items:center;">
+  <input type="text" name="name" placeholder="Your name (optional)" class="input" />
+  <input type="email" name="email" placeholder="you@example.com" required class="input" />
+  <!-- Honeypot (hidden) -->
+  <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" />
+  <button type="submit" id="waitlist-btn">Join waitlist</button>
+  <span id="waitlist-msg" aria-live="polite"></span>
+</form>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+  // 🔧 Replace with your actual values
+  const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR-ANON-KEY";
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById("waitlist-form");
+  const btn  = document.getElementById("waitlist-btn");
+  const msg  = document.getElementById("waitlist-msg");
+
+  function getUTMs() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      utm_source:  p.get("utm_source"),
+      utm_medium:  p.get("utm_medium"),
+      utm_campaign:p.get("utm_campaign"),
+    };
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const email = String(data.get("email") || "").trim().toLowerCase();
+    const name  = String(data.get("name")  || "").trim();
+    const trap  = String(data.get("company") || ""); // honeypot
+
+    if (trap) return; // bot detected, silently drop
+
+    // basic email check
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      msg.textContent = "Please enter a valid email.";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Adding…";
+    msg.textContent = "";
+
+    const utm = getUTMs();
+
+    const { error } = await supabase.from("waitlist").insert([{
+      email,
+      name: name || null,
+      source: location.hostname || "landing",
+      utm_source:  utm.utm_source,
+      utm_medium:  utm.utm_medium,
+      utm_campaign:utm.utm_campaign,
+    }]);
+
+    if (!error) {
+      msg.textContent = "🎉 You're on the list!";
+      form.reset();
+    } else if (error.code === "23505") {
+      msg.textContent = "You're already on the list — welcome back!";
+    } else {
+      console.error(error);
+      msg.textContent = "Something went wrong. Please try again.";
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Join waitlist";
+  });
+</script>
+
+<style>
+  .input { padding:10px; border:1px solid #ddd; border-radius:8px; }
+  button { padding:10px 14px; border-radius:8px; border:0; background:#111; color:#fff; cursor:pointer; }
+  button[disabled]{ opacity:.6; cursor:not-allowed; }
+</style>
+
 </body>
 </html>
