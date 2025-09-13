@@ -1,33 +1,87 @@
-:root { --bg:#0b0c10; --card:#121317; --txt:#e8e9ee; --muted:#b4b7c9; --brand:#7aa2f7; }
-* { box-sizing: border-box; }
-html,body { margin:0; padding:0; background:var(--bg); color:var(--txt); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; }
-.container { max-width: 1080px; margin: 0 auto; padding: 24px; }
-.nav { display:flex; justify-content:space-between; align-items:center; }
-.logo { font-weight:700; letter-spacing:.5px; color:var(--txt); text-decoration:none; }
-.ghost { color:var(--muted); text-decoration:none; }
-.hero { padding: 72px 0 32px; }
-.hero h1 { font-size: clamp(32px, 6vw, 56px); line-height:1.1; margin:0 0 12px; }
-.sub { color:var(--muted); max-width: 700px; margin: 0 0 24px; }
-.form { display:flex; gap:12px; flex-wrap:wrap; }
-.form input { flex:1; min-width: 260px; padding:14px 16px; border-radius:14px; border:1px solid #2a2d37; background:#0f1015; color:var(--txt); }
-button, .button { padding:14px 18px; border-radius:14px; border:0; background:var(--brand); color:#0b0c10; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; }
-.trust { display:block; color:var(--muted); margin-top:8px; }
+<!-- Optional: nicer system-safe fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap">
 
-.features { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; padding: 24px 0 48px; }
-.features article { background:var(--card); padding:18px; border-radius:16px; border:1px solid #1c1e26; }
-.features h3 { margin:6px 0 4px; }
+<style>
+  /* ===== THEME V2: light, editorial, job-form style ===== */
+  :root{
+    --bg:#f8fafc;          /* page background */
+    --card:#ffffff;        /* cards/sections */
+    --txt:#0b0c10;         /* primary text */
+    --muted:#6b7280;       /* secondary text */
+    --brand:#111111;       /* CTA + accents */
+    --line:#e5e7eb;        /* subtle borders */
+    --container:1080px;
+    --radius:16px; --radius-sm:12px;
+    --shadow:0 10px 40px rgba(0,0,0,.06);
 
-.quote { text-align:center; padding: 24px 0 8px; }
-.quote blockquote { font-size: clamp(20px, 3.2vw, 32px); margin:0; }
-.caption { color:var(--muted); }
+    --serif:"Newsreader","Georgia",Cambria,"Times New Roman",Times,serif;
+    --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  }
 
-.cta { text-align:center; padding: 12px 0 72px; }
-.footer { display:flex; gap:16px; justify-content:space-between; align-items:center; border-top:1px solid #1c1e26; margin-top:36px; padding-top:16px; }
-.footer a { color:var(--muted); text-decoration:none; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);font:16px/1.65 var(--sans);}
 
-.success { background:#13331a; color:#c6f6d5; padding:14px; border-radius:12px; }
-.error { background:#3a1318; color:#ffd5d5; padding:14px; border-radius:12px; }
+  /* Layout */
+  .container{max-width:var(--container);margin:0 auto;padding:24px}
+  header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.75);
+         -webkit-backdrop-filter:saturate(180%) blur(8px); backdrop-filter:saturate(180%) blur(8px);
+         border-bottom:1px solid var(--line)}
+  .nav{display:flex;justify-content:space-between;align-items:center;height:68px}
+  .logo{font:700 18px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--txt)}
+  .ghost{color:var(--muted);text-decoration:none}
 
-@media (max-width: 880px){
-  .features { grid-template-columns: 1fr; }
-}
+  /* Hero — editorial look */
+  .hero{padding:96px 0 40px}
+  .hero h1{font-family:var(--serif);font-weight:700;
+           font-size:clamp(44px,6vw,72px);line-height:1.05;letter-spacing:-.01em;margin:0 0 16px}
+  .sub{font-size:18px;color:var(--muted);max-width:72ch;margin:0 0 28px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* Cards & sections */
+  .promo-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+  .divider{height:1px;background:var(--line);margin:64px 0}
+  .section{padding:64px 0}
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .features article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .features h3{font-family:var(--serif);font-weight:700;margin:6px 0 8px}
+  @media (max-width:960px){.features{grid-template-columns:1fr}}
+
+  /* Buttons (Greenhouse-ish simple) */
+  button,.button{appearance:none;padding:12px 16px;border-radius:12px;border:1px solid var(--brand);
+    background:var(--brand);color:#fff;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+  .button.secondary{background:#fff;color:var(--txt);border:1px solid var(--line)}
+
+  /* Longform typography blocks like Thinking Machines */
+  .prose p{margin:0 0 1rem;max-width:75ch}
+  .prose h2{font-family:var(--serif);font-size:32px;margin:2rem 0 0.75rem}
+  .prose small,.caption{color:var(--muted)}
+
+  /* Footer */
+  .footer{display:flex;gap:16px;justify-content:space-between;align-items:center;
+          border-top:1px solid var(--line);margin-top:48px;padding:18px 0;color:var(--muted);font-size:14px}
+  .footer a{color:inherit;text-decoration:none}
+
+  /* Alerts */
+  .success{background:#ecfdf5;color:#065f46;padding:14px;border:1px solid #a7f3d0;border-radius:12px}
+  .error{background:#fef2f2;color:#991b1b;padding:14px;border:1px solid #fecaca;border-radius:12px}
+
+  /* ===== Waitlist form: Greenhouse look ===== */
+  #waitlist{scroll-margin-top:96px}
+  .wl-card{max-width:760px;margin:32px auto 0;padding:32px;background:var(--card);
+           border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .wl-title{font-family:var(--serif);font-size:34px;line-height:1.15;margin:0 0 4px}
+  .wl-hint{margin:0 0 24px;color:var(--muted);font-size:14px}
+  .wl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:720px){.wl-grid{grid-template-columns:1fr}}
+  .wl-field{display:grid;gap:8px;margin:0 0 18px}
+  .wl-label{font-weight:700}
+  .wl-input{padding:14px 12px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff;color:var(--txt);outline:0}
+  .wl-input:focus{border-color:#111;box-shadow:0 0 0 4px rgba(17,17,17,.08)}
+  .wl-actions{margin-top:6px}
+  .wl-btn{background:#111;border:1px solid #111;color:#fff;border-radius:12px;font-weight:700;padding:12px 16px}
+  .wl-btn[disabled]{opacity:.6;cursor:not-allowed}
+  .wl-msg{margin-top:12px;font-size:14px;color:var(--muted)}
+  .wl-hp{position:absolute;left:-5000px}
+</style>
